@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "google-spreadsheet": "^3.1.15",
+    "twilio": "^3.60.0"
+  },
+  "scripts": {
+    "start": "npm-run-all --parallel twilio-webhook server",
+    "server" : "node server.js",
+    "twilio-webhook": "twilio phone-numbers:update \"+13132419680\" --sms-url=\"http://localhost:3000/sms\""
+  },
+  "name": "text-to-notes",
+  "description": "i want to text my notes and have them recorded.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommerkle1/text-to-notes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tommerkle1/text-to-notes/issues"
+  },
+  "homepage": "https://github.com/tommerkle1/text-to-notes#readme"
+}
