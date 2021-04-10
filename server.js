@@ -4,19 +4,21 @@ const { urlencoded } = require("body-parser");
 
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const { GoogleSpreadsheet } = require("google-spreadsheet");
+const {
+  AssetVersionContext,
+} = require("twilio/lib/rest/serverless/v1/service/asset/assetVersion");
 
 const app = express();
 app.use(urlencoded({ extended: false }));
 
-const sheetId = "1wswCabOKHPI0hgMBOzrRNz3oLLf70CkhWjCVIq9imxU";
+const docId = "1wswCabOKHPI0hgMBOzrRNz3oLLf70CkhWjCVIq9imxU";
+
+const validMessageTypes = ["idea", "todo"];
 
 // Initialize the sheet - doc ID is the long id in the sheets URL
-const doc = new GoogleSpreadsheet(sheetId);
+const doc = new GoogleSpreadsheet(docId);
 
-app.post("/sms", async (req, res) => {
-  // Start our TwiML response.
-  const twiml = new MessagingResponse();
-
+async function initializeDoc() {
   // Initialize Auth
   await doc.useServiceAccountAuth({
     client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -24,16 +26,68 @@ app.post("/sms", async (req, res) => {
   });
 
   await doc.loadInfo(); // loads document properties and worksheets
+}
 
-  const sheet = doc.sheetsByIndex[0];
+function isValid(s) {
+  return s in validMessageTypes;
+}
+
+function parseMessageType(message) {
+  // parse message based on first word.
+  const splitMessage = message.split(" ");
+
+  const firstWord = splitMessage[0].toLowerCase();
+
+  const messageType = validMessageTypes.includes(firstWord) ? firstWord : "";
+
+  if (messageType === "") throw new Error(`Invalid Message Type: ${firstWord}`);
+
+  const test = splitMessage.slice(1);
+
+  return {
+    note: splitMessage.slice(1).join(" "),
+    messageType,
+  };
+}
+
+app.post("/sms", async (req, res) => {
+  // should map to sheet depending on input of text
+
+  const {
+    body: { Body: rawMessage, From: sender },
+  } = req;
+
+  const { note, messageType } = parseMessageType(rawMessage);
+
+  const twiml = new MessagingResponse();
+
+  await initializeDoc();
+
+  switch (messageType) {
+    case "idea":
+      break;
+
+    default:
+      break;
+  }
+
+  let sheet;
+
+  try {
+    sheet = doc.sheetsByTitle[messageType];
+  } catch (e) {
+    throw new Error(`Invalid sheet key: ${messageType}`);
+  }
 
   const newRow = await sheet.addRow({
-    sender: req.body.From,
-    note: req.body.Body,
+    sender,
+    note,
   });
 
   // Add a text message.
-  const msg = twiml.message(`You shall write to:  ${doc.title}!`);
+  const msg = twiml.message(
+    `Just added your note to the '${messageType}' list!`
+  );
 
   res.end(msg.toString());
 });
