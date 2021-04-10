@@ -1,6 +1,8 @@
 #creds
 text-to-notes-pk.json
 
+#dev
+launch.json
 
 # Logs
 logs
