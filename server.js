@@ -63,14 +63,6 @@ app.post("/sms", async (req, res) => {
 
   await initializeDoc();
 
-  switch (messageType) {
-    case "idea":
-      break;
-
-    default:
-      break;
-  }
-
   let sheet;
 
   try {
@@ -82,6 +74,7 @@ app.post("/sms", async (req, res) => {
   const newRow = await sheet.addRow({
     sender,
     note,
+    time: new Date().toISOString(),
   });
 
   // Add a text message.

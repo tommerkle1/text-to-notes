@@ -8,5 +8,9 @@ the dream:
 
 queryable via text interface. i.e. two way data flow
 
+a chatbot perhaps?
+
 
 twilio + gsheets
+
+
