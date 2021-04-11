@@ -1,4 +1,4 @@
-# text-to-notes
+# textnote
 
 i want to text my notes and have them recorded.
 
