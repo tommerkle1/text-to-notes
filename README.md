@@ -1,6 +1,6 @@
 # textnote
 
-i want to text my notes and have them recorded.
+i want to text my notes to a bot.
 
 imessage / SMS -> data storage
 
