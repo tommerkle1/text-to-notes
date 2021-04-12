@@ -7,21 +7,24 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel twilio-webhook server",
-    "server" : "node server.js",
+    "server": "node server.js",
     "twilio-webhook": "twilio phone-numbers:update \"+13132419680\" --sms-url=\"http://localhost:3000/sms\""
   },
-  "name": "text-to-notes",
+  "name": "textnote",
   "description": "i want to text my notes and have them recorded.",
   "version": "1.0.0",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tommerkle1/text-to-notes.git"
+    "url": "git+https://github.com/tommerkle1/textnote.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tommerkle1/text-to-notes/issues"
+    "url": "https://github.com/tommerkle1/textnote/issues"
   },
-  "homepage": "https://github.com/tommerkle1/text-to-notes#readme"
+  "homepage": "https://github.com/tommerkle1/textnote#readme",
+  "devDependencies": {
+    "serverless": "^2.35.0"
+  }
 }
