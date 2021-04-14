@@ -3,10 +3,12 @@ const express = require("express");
 const { urlencoded } = require("body-parser");
 
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
+
 const { GoogleSpreadsheet } = require("google-spreadsheet");
-const {
-  AssetVersionContext,
-} = require("twilio/lib/rest/serverless/v1/service/asset/assetVersion");
+
+// const {
+//   AssetVersionContext,
+// } = require("twilio/lib/rest/serverless/v1/service/asset/assetVersion");
 
 const app = express();
 app.use(urlencoded({ extended: false }));
