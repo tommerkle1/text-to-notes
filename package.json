@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel twilio-webhook server",
-    "server": "node server.js",
+    "server": "node channelServer.js",
     "twilio-webhook": "twilio phone-numbers:update \"+13132419680\" --sms-url=\"http://localhost:3000/sms\""
   },
   "name": "textnote",
