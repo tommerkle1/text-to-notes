@@ -1,4 +1,4 @@
-# textnote
+# textmybot
 
 i want to text my notes to a bot.
 
