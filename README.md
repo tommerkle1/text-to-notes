@@ -2,15 +2,16 @@
 
 i want to text my notes to a bot.
 
-imessage / SMS -> data storage
+## function
+personal digital assistant that works 
+    
+## features
 
-the dream:
+- takes notes in a customizable location, by category. First should determine intent, and then route the note to a location, classified based on determined intent
 
-queryable via text interface. i.e. two way data flow
+- set reminders for bot to respond at a future date / time
 
-a chatbot perhaps?
+- set event on calendar
 
-
-twilio + gsheets
-
-
+## long shot
+other people can interact with my assistant? (https://www.youtube.com/watch?v=Y1gFSENorEY) lol
