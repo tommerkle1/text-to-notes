@@ -1,6 +1,6 @@
 # textmybot
 
-i want to text my notes to a bot.
+i want to text my bot.
 
 ## function
 personal digital assistant that works 
